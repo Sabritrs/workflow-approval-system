@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { SignIn } from '@clerk/nextjs';
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -49,12 +50,18 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-            Log in
-          </Button>
-          <Button size="sm" className="rounded-xl">
-            Start Free Trial
-          </Button>
+          
+          <Link href="/sign-in" onClick={() => setMobileOpen(false)}>
+                <Button variant="ghost" size="sm">
+                  Log in
+                </Button>
+          </Link>
+          <Link href="/dashboard">
+            <Button size="sm" className="rounded-xl">
+              Start Free Trial
+            </Button>
+          </Link>
+          
         </div>
 
         <button
@@ -88,12 +95,19 @@ export function Navbar() {
               )
             })}
             <div className="flex flex-col gap-2 pt-2">
-              <Button variant="ghost" size="sm">
-                Log in
-              </Button>
-              <Button size="sm" className="rounded-xl">
-                Start Free Trial
-              </Button>
+              
+              <Link href="/sign-in" onClick={() => setMobileOpen(false)}>
+                <Button variant="ghost" size="sm">
+                  Log in
+                </Button>
+              </Link>
+              
+              <Link href="/dashboard">
+                <Button size="sm" className="rounded-xl">
+                  Start Free Trial
+                </Button>
+              </Link>
+              
             </div>
           </div>
         </motion.div>

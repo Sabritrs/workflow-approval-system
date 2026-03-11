@@ -13,6 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useAuth } from "@clerk/nextjs"
+//import { UserButton } from '@clerk/nextjs'
+
 
 const organizations = [
   { name: "Acme Corporation", plan: "Enterprise" },
@@ -24,7 +27,24 @@ interface TopNavbarProps {
   onMobileMenuToggle: () => void
 }
 
+
+
+export default function Page() {
+  return (
+    <>
+      
+    </>
+  )
+}
+
+
+
+
 export function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
+  const {signOut, isSignedIn} = useAuth()
+  if(isSignedIn){
+    
+  }
   return (
     <header className="flex h-14 items-center justify-between border-b border-border bg-card px-4 sm:h-16 sm:px-6">
       {/* Left: Hamburger on mobile + Org switcher */}
@@ -67,11 +87,14 @@ export function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
+        
       </div>
 
       {/* Right: Actions */}
+      {/*<UserButton></UserButton>*/}
       <div className="flex items-center gap-1 sm:gap-2">
         {/* Notifications */}
+        
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative size-9" aria-label="Notifications">
@@ -134,8 +157,11 @@ export function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
-              <LogOut className="size-4" />
+            <DropdownMenuItem
+              className="text-red-500 focus:text-red-500"
+              onClick={() => signOut()}
+            >
+              <LogOut className="size-4 mr-2" />
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -143,4 +169,4 @@ export function TopNavbar({ onMobileMenuToggle }: TopNavbarProps) {
       </div>
     </header>
   )
-}
+};
